@@ -1,6 +1,8 @@
 <template>
     <div>
-        
+        <div v-for="stat in stats" :key="stat.card">
+            {{stat.card}} {{stat.points}}
+        </div>
     </div>
 </template>
 
@@ -15,11 +17,14 @@ export default {
         }
     } ,
     mounted (){
-        axios.get(process.env.VUE_APP_DATABASE + 'stats/IKO')
-            .then(response => this.stats = response.data[0].stats)
+        axios.get(process.env.VUE_APP_DATABASE + 'stats/filter/MatosFilter')
+            .then(response => this.stats = response.data.sort( (a, b) => (a.points > b.points) ? -1 : 1))
             .catch(error => {
               console.log(error)
             })
+    },
+    methods: {
+        
     }
 }
 </script>

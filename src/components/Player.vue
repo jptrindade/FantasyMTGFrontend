@@ -23,7 +23,7 @@ export default {
     },
     mounted (){
         axios.get(process.env.VUE_APP_DATABASE + 'stats/'+this.player.name)
-            .then(response => this.points = response.data)
+            .then(response => this.points = response.data )
             .catch(error => {
               console.log(error)
             })
