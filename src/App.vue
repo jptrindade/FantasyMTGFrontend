@@ -1,18 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+    <div v-for="player in players" :key="player.name">
+      <Player :player="player" />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Player from './components/Player.vue'
+import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Player
+  },
+  data (){
+    return {
+      players: []
+    }
+  } ,
+    mounted (){
+        axios.get(process.env.VUE_APP_DATABASE + 'players')
+            .then(response => this.players = response.data)
+            .catch(error => {
+              console.log(error)
+            })
+    }
 }
 </script>
 
