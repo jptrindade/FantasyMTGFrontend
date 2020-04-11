@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h1> {{player.name}} has {{points}} points </h1>
+        <h1> {{player.name}} has {{points.points}} points </h1>
         <h2> Picks </h2>
         <div v-for="pick in player.picks" :key="player.name + pick">
             <p>
-                {{pick}}
+                {{pick}} {{points[pick]}}
             </p>
         </div>
     </div>
@@ -18,12 +18,12 @@ export default {
     props: ["player"],
     data (){
         return{
-            points: 0
+            points: {}
         }
     },
     mounted (){
         axios.get(process.env.VUE_APP_DATABASE + 'stats/'+this.player.name)
-            .then(response => this.points = response.data.points)
+            .then(response => this.points = response.data)
             .catch(error => {
               console.log(error)
             })

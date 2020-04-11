@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div v-for="player in players" :key="player.name">
+    <div id="player-stats">
+        <div class="player" v-for="player in players" :key="player.name">
             <Player :player="player" />
         </div>
     </div>
@@ -31,5 +31,11 @@ export default {
 </script>
 
 <style scoped>
-
+#player-stats {
+    display: flex;
+    flex-wrap: wrap;
+}
+.player {
+    margin:auto
+}
 </style>
