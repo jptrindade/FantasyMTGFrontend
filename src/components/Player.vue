@@ -1,6 +1,7 @@
 <template>
     <div>
-        {{player.name}} has {{points}} points
+        <h1> {{player.name}} has {{points}} points </h1>
+        <h2> Picks </h2>
         <div v-for="pick in player.picks" :key="player.name + pick">
             <p>
                 {{pick}}
