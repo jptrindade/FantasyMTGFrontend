@@ -1,18 +1,19 @@
 <template>
   <div id="app">
-    <CardLeaderboard />
-    <PlayerStats />
+      <TopBarChart />
+      <PlayerStats />
+
   </div>
 </template>
 
 <script>
 import PlayerStats from './components/PlayerStats.vue'
-import CardLeaderboard from './components/CardLeaderboard.vue'
+import TopBarChart from './components/TopBarChart.vue'
 
 export default {
   name: 'App',
   components: {
-    CardLeaderboard,
+    TopBarChart,
     PlayerStats
   }
     

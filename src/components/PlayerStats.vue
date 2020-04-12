@@ -20,9 +20,11 @@ export default {
             players: []
         }
     } ,
-    mounted (){
+    created (){
         axios.get(process.env.VUE_APP_DATABASE + 'players')
-            .then(response => this.players = response.data.sort( (a, b) => (a.points > b.points) ? -1 : 1))
+            .then(response => {
+                this.players = response.data.sort( (a, b) => (a.points > b.points) ? -1 : 1)
+            })
             .catch(error => {
               console.log(error)
             })
@@ -34,8 +36,10 @@ export default {
 #player-stats {
     display: flex;
     flex-wrap: wrap;
+    margin-top:2%;
 }
 .player {
-    margin:auto
+    margin:auto;
+    flex: 1;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="player">
         <h1> {{player.name}}</h1>
         <h2> {{this.points}} points</h2>
         <h2> Picks </h2>
