@@ -23,7 +23,7 @@ export default {
         
     } ,
     created (){
-        axios.get(process.env.VUE_APP_DATABASE + 'stats/IKOrmNoLands')
+        axios.get(process.env.VUE_APP_DATABASE + 'stats/filters/IKOrmNoLands')
             .then(response => {
                 this.stats = response.data.sort( (a, b) => (a.points > b.points) ? -1 : 1)
                 this.stats.slice(0,this.showTop).forEach(element => {
