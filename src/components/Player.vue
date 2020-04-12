@@ -1,10 +1,11 @@
 <template>
     <div>
-        <h1> {{player.name}} has {{points.points}} points </h1>
+        <h1> {{player.name}}</h1>
+        <h2> {{this.points}} points</h2>
         <h2> Picks </h2>
-        <div v-for="pick in player.picks" :key="player.name + pick">
+        <div v-for="pick in this.picks_display" :key="player.name + pick.card">
             <p>
-                {{pick}} {{points[pick]}}
+                {{pick.card}} {{pick.points}}
             </p>
         </div>
     </div>
@@ -18,12 +19,23 @@ export default {
     props: ["player"],
     data (){
         return{
-            points: {}
+            picks_display: [],
+            points: 0
         }
     },
     mounted (){
         axios.get(process.env.VUE_APP_DATABASE + 'stats/'+this.player.name)
-            .then(response => this.points = response.data )
+            .then(response => {
+                this.player.picks.forEach(element => {
+                    this.picks_display.push({
+                        card: element,
+                        points: response.data[element]
+                    })
+                });
+                this.picks_display.sort( (a, b) => (a.points > b.points) ? -1 : 1)
+                this.points = response.data.points
+                }
+            )
             .catch(error => {
               console.log(error)
             })

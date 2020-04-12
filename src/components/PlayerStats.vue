@@ -22,7 +22,7 @@ export default {
     } ,
     mounted (){
         axios.get(process.env.VUE_APP_DATABASE + 'players')
-            .then(response => this.players = response.data)
+            .then(response => this.players = response.data.sort( (a, b) => (a.points > b.points) ? -1 : 1))
             .catch(error => {
               console.log(error)
             })
