@@ -1,20 +1,22 @@
-<template>
+<template id="global">
   <div id="app">
-      <TopBarChart />
+      <Snapshot />
+      <TopBarChart  :showTop="20"/>
       <PlayerStats />
-
   </div>
 </template>
 
 <script>
 import PlayerStats from './components/PlayerStats.vue'
 import TopBarChart from './components/TopBarChart.vue'
+import Snapshot from './components/Snapshot.vue'
 
 export default {
   name: 'App',
   components: {
     TopBarChart,
-    PlayerStats
+    PlayerStats,
+    Snapshot
   }
     
 }
@@ -28,5 +30,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#global{
+  background:"#eeeeee"
 }
 </style>

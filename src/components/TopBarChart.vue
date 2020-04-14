@@ -6,7 +6,7 @@ import { Bar } from 'vue-chartjs'
 export default {
     extends: Bar,
     name: "TopBarChart"   ,
-
+    props: ['showTop'],
     data (){
         return {
             stats: [],
@@ -17,27 +17,31 @@ export default {
                     backgroundColor: "#f87979",
                     data : []
                 }
-            ],
-            showTop: 20
+            ]
         }
         
     } ,
     created (){
-        axios.get(process.env.VUE_APP_DATABASE + 'stats/filters/IKOrmNoLands')
+        axios.get(process.env.VUE_APP_DATABASE + 'stats/filter/IKOrmNoLands')
             .then(response => {
-                this.stats = response.data.sort( (a, b) => (a.points > b.points) ? -1 : 1)
-                this.stats.slice(0,this.showTop).forEach(element => {
-                    this.labels.push(element.card)
-                    this.datasets[0].data.push(element.points)
-                });
-                this.$emit('loading',false)
-                this.renderChart({
-                    labels: this.labels,
-                    datasets: this.datasets
-                    },
-                     { responsive: true, maintainAspectRatio: false })
-                
-                })
+                if(response.data.length != 0){
+                    this.stats = response.data.sort( (a, b) => (a.points > b.points) ? -1 : 1)
+                    this.stats.slice(0,this.showTop).forEach(element => {
+                        this.labels.push(element.card)
+                        this.datasets[0].data.push(element.points)
+                    });
+                    this.renderChart({
+                        labels: this.labels,
+                        datasets: this.datasets
+                        },
+                        { 
+                            responsive: true, 
+                            maintainAspectRatio: false,
+
+                        })
+                    }
+            
+            })
             .catch(error => {
               console.log(error)
             })
