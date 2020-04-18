@@ -1,5 +1,5 @@
-<template id="global">
-  <div id="app">
+<template>
+  <div id="app" >
       <Snapshot />
       <TopBarChart  :showTop="20"/>
       <PlayerStats />
@@ -22,6 +22,7 @@ export default {
 }
 </script>
 
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -29,9 +30,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  padding-top:60px;
+  background:#eeeeee;
 }
-#global{
-  background:"#eeeeee"
+
+body, html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 100%; 
 }
 </style>
